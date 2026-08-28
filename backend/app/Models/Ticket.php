@@ -22,7 +22,7 @@ class Ticket extends Model
     }
 
     // El técnico al que se le asignó el ticket
-    public function assignedTo()
+    public function assignedTech()
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
