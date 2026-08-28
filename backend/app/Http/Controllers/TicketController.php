@@ -64,12 +64,18 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
+
+        return response()->json([
+            'message' => 'Ticket eliminado exitosamente',
+            'ticket' => $ticket
+        ]);
     }
 
-    public function assignTicket(AssignTicketRequest $request, Ticket $ticket) {
+    public function assignTicket(AssignTicketRequest $request, Ticket $ticket)
+    {
         $ticket->assigned_to = $request->validated()['assigned_to'];
 
         $ticket->status = 'in_progress';
