@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['title', 'description', 'user_id', 'assigned_to', 'category_id', 'status', 'priority'])]
 
 class Ticket extends Model
 {
+    // Uso de SoftDeletes para permitir la eliminación suave de tickets
+    use SoftDeletes;
+
     // El usuario que reporta el ticket
     public function user()
     {
