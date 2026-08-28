@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\AssignTicketRequest;
+use App\Http\Requests\UpdateTicketStatusRequest;
 
 class TicketController extends Controller
 {
@@ -14,7 +15,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::with(['user:id,name', 'category:id,name', 'assignedTo:id,name'])->get();
+        $tickets = Ticket::with(['user:id,name', 'category:id,name', 'assignedTech:id,name'])->get();
         return response()->json($tickets);
     }
 
@@ -46,9 +47,18 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateStatus(UpdateTicketStatusRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->status = $request->validated()['status'];
+
+        $ticket->save();
+
+        $ticket->load(['user:id,name', 'category:id,name', 'assignedTech:id,name']);
+
+        return response()->json([
+            'message' => 'Estado del ticket actualizado exitosamente',
+            'ticket' => $ticket
+        ]);
     }
 
     /**
