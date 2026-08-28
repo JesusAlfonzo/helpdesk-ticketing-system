@@ -28,3 +28,8 @@ Route::patch('/tickets/{ticket}/assign', [
     TicketController::class,
     'assignTicket'
 ]);
+
+Route::patch('/tickets/{ticket}/status', [
+    TicketController::class,
+    'updateStatus'
+]);
