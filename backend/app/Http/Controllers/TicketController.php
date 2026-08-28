@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
+use App\Http\Requests\AssignTicketRequest;
 
 class TicketController extends Controller
 {
@@ -24,7 +25,7 @@ class TicketController extends Controller
     {
         $data = $request->validated();
 
-        $data['user_id'] = 1; 
+        $data['user_id'] = 1;
 
         $ticket = Ticket::create($data);
 
@@ -56,5 +57,20 @@ class TicketController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function assignTicket(AssignTicketRequest $request, Ticket $ticket) {
+        $ticket->assigned_to = $request->validated()['assigned_to'];
+
+        $ticket->status = 'in_progress';
+
+        $ticket->save();
+
+        $ticket->load(['assignedTech:id,name']);
+
+        return response()->json([
+            'message' => 'Ticket asignado exitosamente',
+            'ticket' => $ticket
+        ]);
     }
 }
