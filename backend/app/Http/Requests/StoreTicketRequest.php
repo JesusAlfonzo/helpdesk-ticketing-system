@@ -28,8 +28,8 @@ class StoreTicketRequest extends FormRequest
             // 'user_id' => 'required|exists:users,id',
             'assigned_to' => 'nullable|exists:users,id',
             'category_id' => 'required|exists:categories,id',
-            'status' => 'required|string|in:open,in_progress,closed',
-            'priority' => 'required|string|in:low,medium,high'
+            // 'status' => 'required|string|in:open,in_progress,closed',
+            // 'priority' => 'required|string|in:low,medium,high'
         ];
     }
 }
