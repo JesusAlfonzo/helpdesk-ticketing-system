@@ -26,7 +26,7 @@ class TicketController extends Controller
     {
         $data = $request->validated();
 
-        $data['user_id'] = 1;
+        $data['user_id'] = $request->user()->id;
 
         $ticket = Ticket::create($data);
 
