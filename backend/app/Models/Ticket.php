@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['title', 'description', 'user_id', 'assigned_to', 'category_id', 'status', 'priority'])]
+#[Fillable(['title', 'user_id', 'description', 'assigned_to', 'category_id', 'status', 'priority'])]
 
 class Ticket extends Model
 {
